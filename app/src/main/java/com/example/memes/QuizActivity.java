@@ -75,9 +75,11 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 setColor(question.getCorrect_answer(), R.drawable.correct_option_background);
 
                 if (currentPosition == questionList.size()) {
-                    ((Button) view).setText(getString(R.string.submit, "끝"));
+                    submitBtn.setText(getString(R.string.submit, "끝"));
+
                 } else {
-                    ((Button) view).setText(getString(R.string.submit, "다음"));
+                    submitBtn.setText(getString(R.string.submit, "다음"));
+
                 }
             } else {
                 //위치값 상승
