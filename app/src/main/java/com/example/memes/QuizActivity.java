@@ -1,5 +1,6 @@
 package com.example.memes;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -7,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,6 +49,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         //질문 리스트 가져 오기
         questionList = QuestionData.getQuestion();
 
+        for(int i = 0; i < 3; i++){
+            System.out.println(questionList.get(i).getQuestion());
+        }
+
         //화면 셋팅
         getQuestionData();
 
@@ -65,6 +69,8 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 if (selectedOption != question.getCorrect_answer()) { //오답
                     setColor(selectedOption, R.drawable.wrong_option_background);
                     callDialog("오답", "정답 " + question.getCorrect_answer());
+                } else {
+                    score++;
                 }
                 setColor(question.getCorrect_answer(), R.drawable.correct_option_background);
 
@@ -80,11 +86,13 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                     //다음 문제 셋팅
                     getQuestionData();
                 } else {
-                    //결과 액티비티로 넘어가는 코드
-                    Toast.makeText(QuizActivity.this, "끝", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
+                    intent.putExtra("score", score);
+                    intent.putExtra("totalSize", questionList.size());
+                    startActivity(intent);
+                    finish();
                 }
 
-                finish();
             }
             //선택값 초기화
             selectedOption = 0;

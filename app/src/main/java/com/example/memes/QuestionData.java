@@ -19,7 +19,7 @@ public class QuestionData {
         );
 
         Question q2 = new Question(
-                1,
+                2,
                 "2 + 2?",
                 "2",
                 "3",
@@ -29,7 +29,7 @@ public class QuestionData {
         );
 
         Question q3 = new Question(
-                1,
+                3,
                 "3 + 3?",
                 "2",
                 "4",
