@@ -26,6 +26,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".QuizActivity"/>
         <activity android:name=".ResultActivity"/>
+        <activity android:name=".AddQuizActivity"/>
     </application>
 
 </manifest>

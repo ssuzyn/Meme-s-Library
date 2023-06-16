@@ -26,11 +26,9 @@ public class Question {
     public String getOptionOne() {
         return option_one;
     }
-
     public String getOptionTwo() {
         return option_two;
     }
-
     public String getOptionThree() {
         return option_three;
     }

@@ -16,13 +16,13 @@ public class InitialActivity extends AppCompatActivity {
 
         Button btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            Intent intent = new Intent(InitialActivity.this, LoginActivity.class);
             startActivity(intent);
         });
 
         Button btnSignup = findViewById(R.id.btnSignup);
         btnSignup.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+            Intent intent = new Intent(InitialActivity.this, SignupActivity.class);
             startActivity(intent);
         });
     }

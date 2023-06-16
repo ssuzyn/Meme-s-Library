@@ -10,7 +10,7 @@ public class QuestionData {
 
         Question q1 = new Question(
                 1,
-                "1 + 1?",
+                "1 + 1은 무엇일까요?",
                 "1",
                 "2",
                 "3",
@@ -20,11 +20,11 @@ public class QuestionData {
 
         Question q2 = new Question(
                 2,
-                "2 + 2?",
-                "2",
-                "3",
-                "4",
-                "5",
+                "홍대 가려면 어디로 가야해요?",
+                "지하철 타고 가세요",
+                "버스요",
+                "뉴진스 하입보이요",
+                "뉴진면이요",
                 3
         );
 

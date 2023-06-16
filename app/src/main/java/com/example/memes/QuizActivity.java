@@ -49,10 +49,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         //질문 리스트 가져 오기
         questionList = QuestionData.getQuestion();
 
-        for(int i = 0; i < 3; i++){
-            System.out.println(questionList.get(i).getQuestion());
-        }
-
         //화면 셋팅
         getQuestionData();
 
@@ -62,43 +58,21 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         option4.setOnClickListener(this);
 
         submitBtn.setOnClickListener(view -> {
+
             if (selectedOption != 0) {
                 Question question = questionList.get(currentPosition - 1);
 
                 //정답 체크(선택 답변과 정답을 비교)
-                if (selectedOption != question.getCorrect_answer()) { //오답
+                if (selectedOption == question.getCorrect_answer()) {
+                    score++;
+                    setColor(question.getCorrect_answer(), R.drawable.correct_option_background);
+                } else {
                     setColor(selectedOption, R.drawable.wrong_option_background);
                     callDialog("오답", "정답 " + question.getCorrect_answer());
-                } else {
-                    score++;
                 }
-                setColor(question.getCorrect_answer(), R.drawable.correct_option_background);
-
-                if (currentPosition == questionList.size()) {
-                    submitBtn.setText(getString(R.string.submit, "끝"));
-
-                } else {
-                    submitBtn.setText(getString(R.string.submit, "다음"));
-
-                }
-            } else {
-                //위치값 상승
-                currentPosition++;
-                if (currentPosition <= questionList.size()) {
-                    //다음 문제 셋팅
-                    getQuestionData();
-                } else {
-                    Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
-                    intent.putExtra("score", score);
-                    intent.putExtra("totalSize", questionList.size());
-                    startActivity(intent);
-                    finish();
-                }
-
             }
-            //선택값 초기화
-            selectedOption = 0;
         });
+
 
     }
 
@@ -127,11 +101,28 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 .setMessage("정답: " + correctAnswer)
                 .setPositiveButton("OK", (dialog, which) -> {
                     dialog.dismiss(); // 창 닫기
+                    moveToNextQuestion();
                 })
                 .setCancelable(false)
                 .show();
     }
 
+    private void moveToNextQuestion() {
+        currentPosition++;
+        if (currentPosition <= questionList.size()) {
+            // 다음 문제 셋팅
+            getQuestionData();
+        } else {
+            Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
+            intent.putExtra("score", score);
+            intent.putExtra("totalSize", questionList.size());
+            startActivity(intent);
+            finish();
+        }
+
+        // 선택값 초기화
+        selectedOption = 0;
+    }
 
     private void getQuestionData() {
         setOptionStyle();
@@ -165,7 +156,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         submitBtn.setText(getString(R.string.submit, name));
     }
     /**
-    *답변 스타일 설정
+     *답변 스타일 설정
      * */
     private void setOptionStyle() {
         ArrayList<TextView> optionList = new ArrayList<>();

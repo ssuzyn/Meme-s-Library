@@ -15,9 +15,14 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnGotoQuiz = findViewById(R.id.btnGotoQuiz);
         btnGotoQuiz.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
+            Intent intent = new Intent(MainActivity.this, QuizActivity.class);
             startActivity(intent);
         });
 
+        Button btnAddQuiz = findViewById(R.id.btnAddQuiz);
+        btnAddQuiz.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddQuizActivity.class);
+            startActivity(intent);
+        });
     }
 }
